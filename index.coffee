@@ -11,6 +11,7 @@ class Merge
     _.each mergeInfo.files, (tmpFiles) ->
       filesInfos.push getMergeInfo staticsDestPath, tmpFiles
     _.each pages, (value) =>
+      delete value.modifiedAt
       _.each value, (tmpFiles) =>
         tmpFiles = @getRestFiles tmpFiles
         filesInfos.push getMergeInfo staticsDestPath, tmpFiles if tmpFiles.length

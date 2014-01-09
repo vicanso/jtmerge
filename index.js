@@ -20,6 +20,7 @@
         return filesInfos.push(getMergeInfo(staticsDestPath, tmpFiles));
       });
       _.each(pages, function(value) {
+        delete value.modifiedAt;
         return _.each(value, function(tmpFiles) {
           tmpFiles = _this.getRestFiles(tmpFiles);
           if (tmpFiles.length) {
