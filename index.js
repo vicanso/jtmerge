@@ -1,4 +1,6 @@
 (function() {
+  "use strict";
+
   var Merge, getMergeFileName, getMergeInfo, path, _;
 
   _ = require('underscore');
