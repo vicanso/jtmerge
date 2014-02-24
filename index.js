@@ -13,6 +13,14 @@
       this.mergeInfo = mergeInfo;
     }
 
+    /**
+     * getMergeList 返回合并文件列表
+     * @param  {[type]} pages           [description]
+     * @param  {[type]} staticsDestPath [description]
+     * @return {[type]}                 [description]
+    */
+
+
     Merge.prototype.getMergeList = function(pages, staticsDestPath) {
       var filesInfos, mergeInfo,
         _this = this;
@@ -42,6 +50,13 @@
         return !~_.indexOf(mergeFiles, file);
       });
     };
+
+    /**
+     * getMergeExportFiles 获取合并的export files
+     * @param  {[type]} files [description]
+     * @return {[type]}       [description]
+    */
+
 
     Merge.prototype.getMergeExportFiles = function(files) {
       var exportFiles, mergeFiles, mergeInfo, restFiles;

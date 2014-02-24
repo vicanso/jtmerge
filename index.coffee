@@ -5,7 +5,12 @@ path = require 'path'
 class Merge
   constructor : (@mergeInfo) ->
 
-
+  ###*
+   * getMergeList 返回合并文件列表
+   * @param  {[type]} pages           [description]
+   * @param  {[type]} staticsDestPath [description]
+   * @return {[type]}                 [description]
+  ###
   getMergeList : (pages, staticsDestPath) ->
     mergeInfo = @mergeInfo
     filesInfos = []
@@ -23,6 +28,11 @@ class Merge
     mergeFiles = mergeFiles.concat mergeInfo.except
     _.filter files, (file) ->
       !~_.indexOf mergeFiles, file
+  ###*
+   * getMergeExportFiles 获取合并的export files
+   * @param  {[type]} files [description]
+   * @return {[type]}       [description]
+  ###
   getMergeExportFiles : (files) ->
     mergeInfo = @mergeInfo
     mergeFiles = _.flatten mergeInfo.files

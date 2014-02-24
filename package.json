@@ -1,0 +1,23 @@
+{
+  "name" : "jtmerge",
+  "description" : "merge files",
+  "version" : "0.0.1",
+  "author" : {
+    "name" : "vicanso 墨鱼仔",
+    "email" : "vicansocanbico@gmail.com"
+  },
+  "keywords" : [
+    "node",
+    "static file",
+    "importer"
+  ],
+  "dependencies" : {
+    "underscore" : "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vicanso/jtmerge"
+  },
+  "main": "index",
+  "readmeFilename": "README.md"
+}
