@@ -1,6 +1,8 @@
 "use strict"
 _ = require 'underscore'
 path = require 'path'
+fs = require 'fs'
+async = require 'async'
 
 class Merge
   constructor : (@mergeInfo) ->
@@ -53,6 +55,39 @@ class Merge
       else
         data
     exportFiles
+  merge : (rootPath, saveFile, files) ->
+    rImages = /([\s\S]*?)(url\(([^)]+)\))(?!\s*[;,]?\s*\/\*\s*ImageEmbed:skip\s*\*\/)|([\s\S]+)/img
+    rQuotes = /['"]/g
+    rParams = /([?#].*)$/g
+    saveFile = path.join rootPath, saveFile
+    savePath = path.dirname saveFile
+    dataList = []
+    _.each files, (file) ->
+      file = path.join rootPath, file
+      src = fs.readFileSync file, 'utf8'
+      if '.css' == path.extname file
+        result = ''
+        group = null
+        async.whilst ->
+          group = rImages.exec src
+          group != null
+        , (complete) ->
+          if !group[4]
+            result += group[1]
+            img = group[3].trim().replace(rQuotes, '').replace(rParams, '')
+            imgFile = path.join path.dirname(file), img
+            result += "url(#{path.relative(savePath, imgFile)})"
+          else
+            result += group[4]
+          complete()
+        , (err)->
+          if err
+            throw err
+          else
+            dataList.push result
+      else
+        dataList.push src
+    fs.writeFileSync saveFile, dataList.join '\n'
 
 getMergeInfo = (staticsDestPath, tmpFiles) ->
   tmpArr = _.map tmpFiles, (file) ->
